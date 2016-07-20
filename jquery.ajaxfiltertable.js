@@ -64,7 +64,8 @@
 	
 	function changePage(page)
 	{
-		//
+		console.log($(this).html());
+		//console.log(page);
 	}
 	
 	function createFoot(element)
@@ -74,19 +75,36 @@
 		
 		footer = $(element).find("tfoot");
 		
-		if ($(footer).find("th #pagination").length==0)
+		if ($(footer).find("th").find("#pagination").length < 1)
 			$(footer).append("<tr><th colspan=\""+$(element).find("thead th").length+"\"><div id=\"pagination\"></div></th></tr>").find("th #pagination");
 		
-		footerCel = $(footer).find("th #pagination");
-		$(footerCel).append("<a href=\"\">Anterior</a>");
+		footerCel = $(footer).find("th").find("#pagination");
+		
+		if ($(footerCel).find("#anterior").length < 1)
+			$(footerCel).append("<div id=\"anterior\"><a data-page=\""+(page-1)+"\" >Anterior</a></div>");
+		
+		if ($(footerCel).find("#pagesLinks").length < 1)
+			pagesLinks = "<div id=\"pagesLinks\"><ul>";
 		
 		for(i=1;i<=totalPages;i++)
 		{
-			pageLink = $(footerCel).append("<a data-ajaxfiltertable-page=\""+i+"\" >"+i+"</a>");
-			$(pageLink).on("click", changePage);
+			//pageLink = $(footerCel).append("<a data-page=\""+i+"\" >"+i+"</a>");
+			pagesLinks+= "<li><a data-page=\""+i+"\" >"+i+"</a></li>";
 		}
-
-		$(footerCel).append("<a href=\"\">Próxima</a>");
+		
+		if ($(footerCel).find("#pagesLinks").length < 1)
+			pagesLinks+= "</ul></div>";
+		
+		con
+		
+		$(footerCel).find("#pagesLinks").find("ul").append(pagesLinks);
+		
+		if ($(footerCel).find("#proxima").length < 1)
+			$(footerCel).append("<div id=\"proxima\"><a data-page=\""+(page+1)+"\" >Próxima</a></div>");
+		
+		//console.log($(footerCel).find("#pagesLinks").html());
+		
+		$(footerCel).find("#pagesLinks").find("a").on("click","a", changePage);
 	}
 	
 	$.fn.AjaxFilterTable = function( options ) {
