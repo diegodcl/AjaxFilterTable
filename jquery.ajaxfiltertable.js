@@ -64,7 +64,7 @@
 	
 	function changePage(page)
 	{
-		console.log(page);
+		//
 	}
 	
 	function createFoot(element)
