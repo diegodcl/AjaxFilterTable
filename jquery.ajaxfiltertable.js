@@ -6,6 +6,8 @@
 	var totalRec = 0;
 	var totalPages = 0;
 	var page = 0;
+	var currPage = 1;
+	
 	
 	function camelize(str) {
 		return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
@@ -62,10 +64,15 @@
 		});
 	}
 	
-	function changePage(page)
+	function changePage()
 	{
-		console.log($(this).html());
-		//console.log(page);
+		//console.log($(this).html());
+		//console.log("page "+$(this).attr('data-page'));
+		
+		currPage = ($(this).attr('data-page') * recPerPage) - settings.
+		
+		var page $(this).attr('data-page')
+		
 	}
 	
 	function createFoot(element)
@@ -76,14 +83,17 @@
 		footer = $(element).find("tfoot");
 		
 		if ($(footer).find("th").find("#pagination").length < 1)
-			$(footer).append("<tr><th colspan=\""+$(element).find("thead th").length+"\"><div id=\"pagination\"></div></th></tr>").find("th #pagination");
+			$(footer).append("<tr><th colspan=\""+$(element).find("thead").find("th").length+"\"><div id=\"pagination\"></div></th></tr>");
 		
 		footerCel = $(footer).find("th").find("#pagination");
 		
 		if ($(footerCel).find("#anterior").length < 1)
 			$(footerCel).append("<div id=\"anterior\"><a data-page=\""+(page-1)+"\" >Anterior</a></div>");
 		
-		if ($(footerCel).find("#pagesLinks").length < 1)
+		
+		$(footerCel).find("#pagesLinks").remove();
+		
+		//if ($(footerCel).find("#pagesLinks").length < 1)
 			pagesLinks = "<div id=\"pagesLinks\"><ul>";
 		
 		for(i=1;i<=totalPages;i++)
@@ -95,16 +105,16 @@
 		if ($(footerCel).find("#pagesLinks").length < 1)
 			pagesLinks+= "</ul></div>";
 		
-		con
+		$(footerCel).append(pagesLinks);
 		
-		$(footerCel).find("#pagesLinks").find("ul").append(pagesLinks);
+		//$(footerCel).find("#pagesLinks").find("ul").append(pagesLinks);
 		
 		if ($(footerCel).find("#proxima").length < 1)
 			$(footerCel).append("<div id=\"proxima\"><a data-page=\""+(page+1)+"\" >Próxima</a></div>");
 		
 		//console.log($(footerCel).find("#pagesLinks").html());
 		
-		$(footerCel).find("#pagesLinks").find("a").on("click","a", changePage);
+		$(footerCel).find("#pagesLinks").find("a").on("click", changePage);
 	}
 	
 	$.fn.AjaxFilterTable = function( options ) {
