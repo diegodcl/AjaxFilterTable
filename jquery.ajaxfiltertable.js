@@ -7,15 +7,20 @@
 	var totalPages = 0;
 	var page = 0;
 	var currPage = 1;
-	
-	
+	var table;
+
 	function camelize(str) {
 		return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
 				return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
 			}).replace(/\s+/g, '');
 	}
 	
-	function getData(url,filters,handleData) {
+	function getData(url,filters,perPage,page, handleData) {
+		
+		// data do .ajax só aceita uma string ou um array, pesquisar uma soluçõa mais elegante pra enviar pro controller
+		filters["perPage"] = perPage;
+		filters["page"] = page;
+		
 		$.ajax({
 		    async: false,
 		    url: url,
@@ -63,18 +68,7 @@
 			stampLine(tablebody,lineMap);
 		});
 	}
-	
-	function changePage()
-	{
-		//console.log($(this).html());
-		//console.log("page "+$(this).attr('data-page'));
-		
-		currPage = ($(this).attr('data-page') * recPerPage) - settings.
-		
-		var page $(this).attr('data-page')
-		
-	}
-	
+
 	function createFoot(element)
 	{
 		if ($(element).find("tfoot").length < 1)
@@ -90,15 +84,12 @@
 		if ($(footerCel).find("#anterior").length < 1)
 			$(footerCel).append("<div id=\"anterior\"><a data-page=\""+(page-1)+"\" >Anterior</a></div>");
 		
-		
 		$(footerCel).find("#pagesLinks").remove();
 		
-		//if ($(footerCel).find("#pagesLinks").length < 1)
-			pagesLinks = "<div id=\"pagesLinks\"><ul>";
+		pagesLinks = "<div id=\"pagesLinks\"><ul>";
 		
 		for(i=1;i<=totalPages;i++)
 		{
-			//pageLink = $(footerCel).append("<a data-page=\""+i+"\" >"+i+"</a>");
 			pagesLinks+= "<li><a data-page=\""+i+"\" >"+i+"</a></li>";
 		}
 		
@@ -107,38 +98,49 @@
 		
 		$(footerCel).append(pagesLinks);
 		
-		//$(footerCel).find("#pagesLinks").find("ul").append(pagesLinks);
-		
 		if ($(footerCel).find("#proxima").length < 1)
 			$(footerCel).append("<div id=\"proxima\"><a data-page=\""+(page+1)+"\" >Próxima</a></div>");
-		
-		//console.log($(footerCel).find("#pagesLinks").html());
 		
 		$(footerCel).find("#pagesLinks").find("a").on("click", changePage);
 	}
 	
+	function loadTable(obj,page) {
+		
+		$(obj).find("tbody").find("tr").remove();
+		
+		getData(settings.url, settings.filters, settings.perPage, page, function(output) {
+			records = output;
+		});
+		
+		totalQuery = records["queryRecordCount"];
+		totalRec = records["totalRecordCount"];
+		totalPages = Math.ceil(totalRec / totalQuery);
+		
+		mapTable(obj);
+		fillTable(obj);
+		createFoot(obj);
+	}
+	
+	function changePage()
+	{
+		var page = $(this).attr('data-page');
+		loadTable(table,page);
+	}
+	
 	$.fn.AjaxFilterTable = function( options ) {
-		var settings = $.extend({
+		
+		settings = $.extend({
 			url          : null,
-			filters      : null
+			filters      : null,
+			perPage      : '10'
 		}, options);
 		
 		console.clear();
 		
 		return this.each( function() {
 			
-			getData(settings.url,settings.filters, function(output) {
-				records = output;
-			});
-			
-			totalQuery = records["queryRecordCount"];
-			totalRec = records["totalRecordCount"];
-			totalPages = Math.ceil(totalRec / totalQuery);
-			
-			
-			mapTable(this);
-			fillTable(this);
-			createFoot(this);
+			table = this;
+			loadTable(table);
 			
         });
 	}
