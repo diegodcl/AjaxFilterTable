@@ -88,6 +88,8 @@
 		
 		pagesLinks = "<div id=\"pagesLinks\"><ul>";
 		
+		console.log("totalPages "+totalPages);
+		
 		for(i=1;i<=totalPages;i++)
 		{
 			pagesLinks+= "<li><a data-page=\""+i+"\" >"+i+"</a></li>";
@@ -114,7 +116,8 @@
 		
 		totalQuery = records["queryRecordCount"];
 		totalRec = records["totalRecordCount"];
-		totalPages = Math.ceil(totalRec / totalQuery);
+		console.log("totalRec "+totalRec+" / totalQuery "+totalQuery+" = "+(totalRec / settings.perPage));
+		totalPages = Math.ceil(totalRec / settings.perPage);
 		
 		mapTable(obj);
 		fillTable(obj);
