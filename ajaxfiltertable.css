@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+.ajaxFilterTable > tfoot #pagination {
+	float: left;
+	/*display: table;*/
+	width: 100%;
+}
+
+.ajaxFilterTable > tfoot #previous {
+	float: left;
+	/*display: table;*/	
+}
+
+.ajaxFilterTable > tfoot #next {
+	float: left;
+	/*display: table;*/	
+}
+
+.ajaxFilterTable > tfoot #pagesLinks {
+	float: left;
+	/*display: table;*/	
+}
+
+.ajaxFilterTable > tfoot > tr > td {
+	text-align: right;
+}
+.ajaxFilterTable > tfoot  ul {
+	width: 100%;
+	list-style: none;
+}
+
+.ajaxFilterTable > tfoot ul li {
+	display: inline;
+	padding: 5px;
+	font-weight: bolder;
+}
+
+.ajaxFilterTable > tfoot ul li a {
+	font-weight: bolder;
+	cursor: pointer;
+}
