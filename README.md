@@ -6,6 +6,6 @@ This Plugin was created by a need for a simple plugin that accepted parameters t
 
 Next steps:
 
-Pagination<br>
+Pagination 90% ready<br>
 Search Box<br>
 Sorting<br>
