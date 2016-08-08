@@ -83,10 +83,28 @@
 		tofoot= "<tr><td colspan=\""+$(table).find("thead").find("th").length+"\">";
 		tofoot+= "<ul><li><a data-page=\""+(page-1)+"\" >Anterior</a></li>";
 
+		//tofoot+= "<li><a data-page=\"1\" >1</a></li>";
+		
+		//var halfPages = Math.ceil(totalPages/2);
+		
 		for(i=1;i<=totalPages;i++)
 		{
+			
 			tofoot+= "<li><a data-page=\""+i+"\" >"+i+"</a></li>";
+			
+			/*
+			if ((totalPages > 5) &&(i==3))
+			{
+				tofoot+= "<li>...</li>";
+				i=totalPages-1;
+			}
+			*/
+			
+			
+			
 		}
+		
+		//tofoot+= "<li><a data-page=\""+totalPages+"\" >"+totalPages+"</a></li>";
 		
 		tofoot+= "<li><a data-page=\""+(page+1)+"\" >Próxima</a></li></ul></td></tr>";
 
@@ -113,7 +131,7 @@
 	
 	function changePage()
 	{
-		var page = $(this).attr('data-page');
+		page = eval($(this).attr('data-page'));
 		loadTable(page);
 	}
 	
