@@ -39,8 +39,8 @@ The Keys of "records" must be like the text content<th> camelized with no spaces
 <th>Name</th> = name
 ```
 
-**Next steps:**
+**Next steps:**<br>
 Pagination - 90% ready<br>
 Create Custom elements in cells<br>
 Search Box<br>
-Sorting<br>
+Sorting
