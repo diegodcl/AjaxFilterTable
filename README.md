@@ -36,9 +36,9 @@ The Keys of "records" must be like the text content of ```<th>``` camelized with
 ```
 <thead>
   <tr>
-    <th>Start Date</th> = startDate
-    <th>End Date</th> = endDate
-    <th>Name</th> = name
+    <th>Start Date</th> // startDate
+    <th>End Date</th> // endDate
+    <th>Name</th> // name
   </tr>
 </thead>
 ```
