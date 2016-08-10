@@ -32,13 +32,14 @@ data["name"] = $("input[name='name']").val();
   "totalRecordCount":36
 }
 ```
-The Keys of "records" must be like the text content of ```<th>``` camelized with no spaces.<br><br>
+The Keys of "records" must be like the text content of ```<th>``` camelized with no spaces, 
+regardless of the order.<br><br>
 ```
 <thead>
   <tr>
+    <th>Name</th> // name
     <th>Start Date</th> // startDate
     <th>End Date</th> // endDate
-    <th>Name</th> // name
   </tr>
 </thead>
 ```
