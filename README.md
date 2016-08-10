@@ -6,11 +6,12 @@ This Plugin was created by a need for a simple plugin that accepted parameters t
 
 Usage:<br><br>
 
-$("#myTable").AjaxFilterTable({<br>
-  url : 'url',<br>
-  filters: data<br>
-});<br><br>
-
+```
+$("#myTable").AjaxFilterTable({
+  url : 'url',
+  filters: data
+});
+```
 url: url to the script/controller to request the json<br>
 data: array with parameters to send with the request<br>
 
