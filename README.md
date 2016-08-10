@@ -13,21 +13,21 @@ $("#myTable").AjaxFilterTable({
 url: url to the script/controller to request the json<br>
 data: array with parameters to send with the request<br>
 ```
-data["start_date"] = $("select[name='start_date']").val();<br>
-data["end_date"] = $("select[name='end_date']").val();<br>
-data["name"] = $("input[name='name']").val();<br><br>
+data["start_date"] = $("select[name='start_date']").val();
+data["end_date"] = $("select[name='end_date']").val();
+data["name"] = $("input[name='name']").val();
 ```
-**Json format must return like:**<br>
+**Json format must return like:**
 ```
-{<br>
-  "records":<br>
-            [
-              {
-                "startDate":"07\/08\/2016",
-                "endDate":"07\/08\/2016",
-                "name":"Diego Leit\u00e3o"
-              }
-            ],
+{
+  "records":
+    [
+      {
+        "startDate":"07\/08\/2016",
+        "endDate":"07\/08\/2016",
+        "name":"Diego Leit\u00e3o"
+      }
+    ],
   "queryRecordCount":10,
   "totalRecordCount":36
 }
@@ -39,8 +39,7 @@ The Keys of "records" must be like the text content<th> camelized with no spaces
 <th>Name</th> = name
 ```
 
-**Next steps:**<br><br>
-
+**Next steps:**
 Pagination - 90% ready<br>
 Create Custom elements in cells<br>
 Search Box<br>
