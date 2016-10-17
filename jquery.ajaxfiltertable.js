@@ -33,13 +33,30 @@
 	}
 	
 	function mapTable() {
+		
+		tableHead = $(table).find("tr").first();
+		
+		$.each(settings.buttons, function(index, value)
+		{
+			$.each(value, function(index, value)
+			{
+				if ($(tableHead).children('th').eq(value.column).html()!=value.caption)
+				{
+					var newpos = value.column;
+					var newitem = '<th>'+value.caption+'</th>';
+					$(tableHead).children('th').eq(newpos).after(newitem);
+				}
+			});
+		});
+		
 		tableHead = $(table).find("tr").first().find("th");
-
-		$.each(tableHead, function() {
+		$.each(tableHead, function() 
+		{
 			index = $(this).index();
 			title = camelize($(this).html());
 			columnMap[index] = title;
 		});
+
 	}
 	
 	function stampLine(element,lineMap) {
@@ -59,6 +76,16 @@
 		var newLine;
 
 		$(tablebody).empty();
+		
+		$.each(settings.buttons, function (key,value){
+			$.each(value, function(key, value){
+				object = "<input type=\"button\" name=\""+value.name+"\" value=\""+value.caption+"\" class=\""+value.class+"\" onclick=\""+value.click+"\">";
+				var caption = value.caption;
+				$.each(records["records"], function (key, value) {
+					value[caption.toLowerCase()]=object;
+				});
+			});
+		});
 		
 		$.each(records["records"], function (key, value) {
 			$.each(value, function(key,value) {
@@ -121,14 +148,13 @@
 		
 		settings = $.extend({
 			url          : null,
+			buttons      : null, 
 			filters      : null,
-			buttons      : null, // [buttons :{name:'bt1',click:'function1()',caption:'editar',class:'btn btn-success', column:'2'}]
 			perPage      : '10'
 		}, options);
 		
 		console.clear();
-		
-		
+				
 		return this.each( function() {
 			
 			table = this;
