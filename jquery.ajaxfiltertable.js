@@ -44,7 +44,7 @@
 				{
 					var newpos = value.column;
 					var newitem = '<th>'+value.caption+'</th>';
-					$(tableHead).children('th').eq(newpos).after(newitem);
+					$(tableHead).children('th').eq(newpos).before(newitem);
 				}
 			});
 		});
