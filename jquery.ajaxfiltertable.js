@@ -79,10 +79,17 @@
 		
 		$.each(settings.buttons, function (key,value){
 			$.each(value, function(key, value){
-				object = "<input type=\"button\" name=\""+value.name+"\" value=\""+value.caption+"\" class=\""+value.class+"\" onclick=\""+value.click+"\">";
-				var caption = value.caption;
+				//object = "<input type=\"button\" name=\""+value.name+"\" value=\""+value.caption+"\" class=\""+value.class+"\" onclick=\""+value.click+"\" data-receita="++">";
+				
+				var object = value;
+				//var caption = value.caption;
 				$.each(records["records"], function (key, value) {
-					value[caption.toLowerCase()]=object;
+					
+					//console.log(value.receita);
+					
+					newbtn = "<input type=\"button\" name=\""+object.name+"\" value=\""+object.caption+"\" class=\""+object.class+"\" onclick=\""+object.click+"\" data-id=\""+value.receita+"\">";
+					
+					value[object.caption.toLowerCase()]=newbtn;
 				});
 			});
 		});
